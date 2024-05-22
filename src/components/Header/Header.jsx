@@ -1,16 +1,16 @@
-import { Fragment } from 'react';
-import logo from '../../assets/logo.svg';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { BellIcon } from '@heroicons/react/24/outline';
+import { Fragment } from "react";
+import logo from "../../assets/logo.svg";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { BellIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
-  { name: 'Rules', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'About', href: '#', current: false },
+  { name: "Rules", href: "#", current: true },
+  { name: "Team", href: "#", current: false },
+  { name: "About", href: "#", current: false },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
@@ -32,11 +32,11 @@ export default function Example() {
                       href={item.href}
                       className={classNames(
                         item.current
-                          ? 'bg-gray-900 text-white'
-                          : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                        'rounded-md px-3 py-2 text-sm font-medium'
+                          ? "bg-gray-900 text-white"
+                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        "rounded-md px-3 py-2 text-sm font-medium",
                       )}
-                      aria-current={item.current ? 'page' : undefined}
+                      aria-current={item.current ? "page" : undefined}
                     >
                       {item.name}
                     </a>
@@ -83,8 +83,8 @@ export default function Example() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100' : '',
-                            'block px-4 py-2 text-sm text-white hover:bg-[#f4eee2]'
+                            active ? "bg-gray-100" : "",
+                            "block px-4 py-2 text-sm text-white hover:bg-[#f4eee2]",
                           )}
                         >
                           Your Profile
@@ -96,8 +96,8 @@ export default function Example() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100' : '',
-                            'block px-4 py-2 text-sm text-white hover:bg-[#f4eee2]'
+                            active ? "bg-gray-100" : "",
+                            "block px-4 py-2 text-sm text-white hover:bg-[#f4eee2]",
                           )}
                         >
                           Settings
@@ -109,8 +109,8 @@ export default function Example() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100' : '',
-                            'block px-4 py-2 text-sm text-white hover:bg-[#f4eee2]'
+                            active ? "bg-gray-100" : "",
+                            "block px-4 py-2 text-sm text-white hover:bg-[#f4eee2]",
                           )}
                         >
                           Sign out

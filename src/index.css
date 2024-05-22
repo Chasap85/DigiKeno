@@ -1,11 +1,11 @@
-@import 'tailwindcss/base';
-@import './customstyles/custom-base-styles.css';
+@import "tailwindcss/base";
+@import "./customstyles/custom-base-styles.css";
 
-@import 'tailwindcss/components';
-@import './customstyles/custom-components.css';
+@import "tailwindcss/components";
+@import "./customstyles/custom-components.css";
 
-@import 'tailwindcss/utilities';
-@import './customstyles/custom-utilities.css';
+@import "tailwindcss/utilities";
+@import "./customstyles/custom-utilities.css";
 
 :root {
   --theme-color-bg: #f4eee2;
