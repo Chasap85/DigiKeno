@@ -1,6 +1,13 @@
 import { Fragment } from "react";
 import logo from "../../assets/logo.svg";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import {
+  Disclosure,
+  Menu,
+  Transition,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+} from "@headlessui/react";
 import { BellIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
@@ -48,7 +55,7 @@ export default function Example() {
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
               <button
                 type="button"
-                className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-[#ce5438] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                className="relative cursor-pointer rounded-full bg-gray-800 p-1 text-gray-400 hover:text-[#ce5438] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
               >
                 <span className="absolute -inset-1.5" />
                 <span className="sr-only">View notifications</span>
@@ -57,7 +64,7 @@ export default function Example() {
               {/* Profile dropdown */}
               <Menu as="div" className="relative ml-3">
                 <div>
-                  <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                  <MenuButton className="relative cursor-pointer flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">Open user menu</span>
                     <img
@@ -65,7 +72,7 @@ export default function Example() {
                       src="https://images.unsplash.com/photo-1593349480506-8433634cdcbe?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                       alt=""
                     />
-                  </Menu.Button>
+                  </MenuButton>
                 </div>
                 <Transition
                   className="bg-[#354751]"
@@ -77,8 +84,8 @@ export default function Example() {
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
                 >
-                  <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <Menu.Item>
+                  <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <MenuItem>
                       {({ active }) => (
                         <a
                           href="#"
@@ -90,8 +97,8 @@ export default function Example() {
                           Your Profile
                         </a>
                       )}
-                    </Menu.Item>
-                    <Menu.Item>
+                    </MenuItem>
+                    <MenuItem>
                       {({ active }) => (
                         <a
                           href="#"
@@ -103,8 +110,8 @@ export default function Example() {
                           Settings
                         </a>
                       )}
-                    </Menu.Item>
-                    <Menu.Item>
+                    </MenuItem>
+                    <MenuItem>
                       {({ active }) => (
                         <a
                           href="#"
@@ -116,8 +123,8 @@ export default function Example() {
                           Sign out
                         </a>
                       )}
-                    </Menu.Item>
-                  </Menu.Items>
+                    </MenuItem>
+                  </MenuItems>
                 </Transition>
               </Menu>
             </div>
