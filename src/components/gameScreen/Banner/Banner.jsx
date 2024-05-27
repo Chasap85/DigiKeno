@@ -1,7 +1,22 @@
 import { Button, Tab } from "@headlessui/react";
+import { useState } from "react";
+import { generateRandomNumbers } from "../../../helpers/ranGenerator";
 
-function Banner() {
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+import { gameOutput } from "../../../helpers/gameSlice";
+
+function Banner({ props }) {
+    const dispatch = useAppDispatch();
+    const { setShowAll } = props;
     const playerCash = 1700;
+    const [gameDealOutput, setGameDealOutput] = useState([]);
+
+    const startDeal = () => {
+        setShowAll(true);
+        setGameDealOutput(generateRandomNumbers(20));
+        dispatch(gameOutput(gameDealOutput));
+        console.log("Deal started", gameDealOutput);
+    }
     return (
         <div className="flex items-center justify-center p-6 h-[154px] w-[95%] outline-[7px] outline-dashed ring-offset-8 outline-[--grey-dark] rounded-[14px]">
             <div className="grid gap-4 grid-cols-3"
@@ -9,16 +24,16 @@ function Banner() {
             >
                 {/* Bet Max/Bet Buttons */}
                 <div className="flex justify-center space-x-1 cursor-pointer">
-                    <Button className="w-32 h-32 bg-[--red] text-white font-bold active:font-extrabold cursor-pointer
+                    <button className="w-32 h-32 bg-[--red] text-white font-bold active:font-extrabold cursor-pointer
                                 active:transform active:scale-95 transition-transform duration-150 ease-out active:bg-[--fd-blue]"
                     >
                         Bet Max
-                    </Button>
-                    <Button className="w-32 h-32 bg-[--red] text-white font-bold active:font-extrabold cursor-pointer
+                    </button>
+                    <button className="w-32 h-32 bg-[--red] text-white font-bold active:font-extrabold cursor-pointer
                                 active:transform active:scale-95 transition-transform duration-150 ease-out active:bg-[--fd-blue]"
                     >
                         Bet
-                    </Button>
+                    </button>
                 </div>
                 {/* Output Screen */}
                 <div className="flex-initial w-auto">
@@ -39,13 +54,15 @@ function Banner() {
                         </p>
                     </div>
                 </div>
-                {/* Hit Button */}
+                {/* Hit Button TODO: connect this to show all num picks */}
                 <div className="flex justify-center">
-                    <Button className="w-32 h-32 bg-[--red] text-white font-bold active:font-extrabold cursor-pointer
+                    <button
+                        onClick={startDeal}
+                        className="w-32 h-32 bg-[--red] text-white font-bold active:font-extrabold cursor-pointer
                                 active:transform active:scale-95 transition-transform duration-150 ease-out active:bg-[--hit]"
                     >
                         Hit
-                    </Button>
+                    </button>
                 </div>
             </div>
         </div>

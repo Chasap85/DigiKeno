@@ -1,13 +1,12 @@
 import { useState } from "react";
 import "./App.css";
+import Action from "./components/gameScreen/ActionBoard/Action";
 import ActionBoard from "./components/gameScreen/ActionBoard/ActionBoard";
 import Header from "./components/Header/Header";
 import CardInfo from "./components/gameScreen/CardInfo/CardInfo";
 import Caller from "./components/Caller/Caller";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <Header />
@@ -16,7 +15,9 @@ function App() {
         style={{ gridTemplateColumns: "1fr 2.3fr .7fr" }}
       >
         <CardInfo />
-        <ActionBoard />
+        <div>
+          <Action />
+        </div>
         <Caller />
       </div>
     </>

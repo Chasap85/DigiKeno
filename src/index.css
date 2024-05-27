@@ -10,13 +10,15 @@
 :root {
   --bg-color: #f4eee2;
   --red: #ce5438;
+  --orange: #ff9d19;
   --grey-dark: #354751;
   --grey: #67696e;
   --yellow: #eed069;
-  --blue: #66b9e9;
+  --blue: #1e9efc;
   --fd-blue: #4d84a4;
   --hit: #646cff;
-
+  --green: #00b585;
+  
   font-family: "acumin-variable", sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -31,6 +33,7 @@
 
 body {
   background-color: var(--bg-color);
+  height: 100vh;
 }
 
 a {
@@ -47,15 +50,18 @@ a:hover {
 p {
   color: white;
   font-size: 1.3em;
-  line-height: 1.5;
-  font-weight: 300;
+  text-transform: uppercase;
+  font-variation-settings:
+    "slnt" 0,
+    "wght" 800,
+    "wdth" 80;
 }
 
 h1 {
   color: var(--grey-dark);
   font-variation-settings:
     "slnt" -12,
-    "wght" 160,
+    "wght" 300,
     "wdth" 115;
   font-size: 6em;
   line-height: 1.1;
@@ -64,8 +70,8 @@ h3 {
   text-transform: uppercase;
   font-variation-settings:
     "slnt" 0,
-    "wght" 700,
-    "wdth" 68;
+    "wght" 820,
+    "wdth" 100;
   color: var(--grey-dark);
   font-size: 1.8em;
   line-height: 1.1;
