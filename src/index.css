@@ -11,14 +11,17 @@
   --bg-color: #f4eee2;
   --red: #ce5438;
   --orange: #ff9d19;
+  --orange-ol: #d67b04;
   --grey-dark: #354751;
   --grey: #67696e;
   --yellow: #eed069;
   --blue: #1e9efc;
-  --fd-blue: #4d84a4;
+  --blue-ol: #106aaa;
   --hit: #646cff;
+  --hit-ol: #4b51ca;
   --green: #00b585;
-  
+  --green-ol: #027f5e;
+  --opacity: 0.5;
   font-family: "acumin-variable", sans-serif;
   line-height: 1.5;
   font-weight: 400;

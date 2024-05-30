@@ -3,67 +3,51 @@ import { useState } from "react";
 import { generateRandomNumbers } from "../../../helpers/ranGenerator";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
-import { gameOutput } from "../../../helpers/gameSlice";
+import { gameOutput, output, gameReset } from "../../../helpers/gameSlice";
+import GamePlayScreen from "./GamePlayScreen";
 
 function Banner({ props }) {
     const dispatch = useAppDispatch();
+    const { setHitPlay, hitPlay } = props;
     const { setShowAll } = props;
-    const playerCash = 1700;
-    const [gameDealOutput, setGameDealOutput] = useState([]);
 
     const startDeal = () => {
+        console.log("Deal");
         setShowAll(true);
-        setGameDealOutput(generateRandomNumbers(20));
-        dispatch(gameOutput(gameDealOutput));
-        console.log("Deal started", gameDealOutput);
+        setHitPlay(true); 
+        dispatch(gameOutput(generateRandomNumbers(20)));
     }
+
     return (
-        <div className="flex items-center justify-center p-6 h-[154px] w-[95%] outline-[7px] outline-dashed ring-offset-8 outline-[--grey-dark] rounded-[14px]">
-            <div className="grid gap-4 grid-cols-3"
-                style={{ gridTemplateColumns: "1fr 2.3fr .7fr" }}
-            >
-                {/* Bet Max/Bet Buttons */}
-                <div className="flex justify-center space-x-1 cursor-pointer">
-                    <button className="w-32 h-32 bg-[--red] text-white font-bold active:font-extrabold cursor-pointer
-                                active:transform active:scale-95 transition-transform duration-150 ease-out active:bg-[--fd-blue]"
+        <div className="flex grid grid-cols-6 gap-4 p-6 outline outline-[8px] outline-[--grey-dark] rounded">
+            <div className="col-span-2">
+                <div className="gap-3 flex m-6">
+                    <button className="flex justify-center items-center mr-4 w-[5rem] h-[5rem] bg-[--bg-color] text-2xl text-[--grey-dark] font-bold active:font-extrabold cursor-pointer
+                                active:transform active:scale-95 transition-transform duration-150 ease-out active:bg-[--hit]
+                                active:text-white outline outline-[4px] outline-[--grey-dark] drop-shadow-md uppercase"
                     >
-                        Bet Max
+                        Max Bet
                     </button>
-                    <button className="w-32 h-32 bg-[--red] text-white font-bold active:font-extrabold cursor-pointer
-                                active:transform active:scale-95 transition-transform duration-150 ease-out active:bg-[--fd-blue]"
+                    <button className="flex justify-center items-center w-[5rem] h-[5rem] bg-[--bg-color] text-2xl text-[--grey-dark] font-bold active:font-extrabold cursor-pointer
+                                active:transform active:scale-95 transition-transform duration-150 ease-out active:bg-[--hit]
+                                active:text-white outline outline-[4px] outline-[--grey-dark] drop-shadow-md uppercase"
                     >
                         Bet
                     </button>
                 </div>
-                {/* Output Screen */}
-                <div className="flex-initial w-auto">
-                    <div className="flex h-32 bg-white border-[10px] border-[--grey-dark] rounded-[6px] grid grid-cols-2 grid-rows-2">
-                        {/* WIN SECTION */}
-                        <p className="ml-2 mt-2 text-[--grey-dark] font-stretched uppercase lg:text-2xl">
-                            win <span className="text-[--red] ml-4">1000</span>
-                        </p>
-                        <div className="flex justify-end items-center mt-10 mr-2">
-                            <div className="text-right text-[--grey-dark] font-stretched uppercase lg:text-2xl">
-                                cash
-                                <span className="block text-[--red] mt-2 lg:text-xl leading-tight">{playerCash}</span>
-                            </div>
-                        </div>
-                        <p className="ml-2 mt-2 font-bold uppercase text-[--grey-dark]">
-                            bet
-                            <span> 40</span>
-                        </p>
-                    </div>
-                </div>
-                {/* Hit Button TODO: connect this to show all num picks */}
-                <div className="flex justify-center">
-                    <button
-                        onClick={startDeal}
-                        className="w-32 h-32 bg-[--red] text-white font-bold active:font-extrabold cursor-pointer
-                                active:transform active:scale-95 transition-transform duration-150 ease-out active:bg-[--hit]"
-                    >
-                        Hit
-                    </button>
-                </div>
+            </div>
+            <div className="flex justify-center p-4 items-center col-span-3 bg-[--grey-dark] rounded-md">
+                <GamePlayScreen />
+            </div>
+            <div className="flex justify-center items-center">
+                <button
+                    onClick={startDeal}
+                    className="bg-[--red] w-[7rem] h-[7rem] text-white font-bold active:font-extrabold cursor-pointer
+                                active:transform active:scale-95 transition-transform duration-150 ease-out active:bg-[--hit]
+                                outline outline-[4px] outline-[--grey-dark] drop-shadow-md uppercase"
+                >
+                    Hit
+                </button>
             </div>
         </div>
     );

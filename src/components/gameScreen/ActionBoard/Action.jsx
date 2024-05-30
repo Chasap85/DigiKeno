@@ -6,7 +6,8 @@ import Banner from "../Banner/Banner";
 function Action() {
     const [totalPicks, setTotalPicks] = useState([]);
     const [showAll, setShowAll] = useState(false);
-    const props = { totalPicks, setTotalPicks, showAll, setShowAll };
+    const [hitPlay, setHitPlay] = useState(false);
+    const props = { totalPicks, setTotalPicks, showAll, setShowAll, hitPlay, setHitPlay };
 
     return (
         <div className="flex flex-col items-center">

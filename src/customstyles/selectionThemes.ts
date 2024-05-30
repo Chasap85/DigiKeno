@@ -1,7 +1,8 @@
+// review: should there be a default and a hit theme?
 export const actionBoardThemes = {
-    A: "bg-[--red] text-white focus:ring-[--red]",
-    B: "bg-[--hit] focus:ring-[--hit] text-white",
-    C: "bg-[--green] focus:ring-[--green] text-white",
+    A: "bg-[--orange] text-white focus:ring-[--orange]",
+    B: "bg-[--green] focus:ring-[--green] text-white",
+    C: "bg-[--hit] focus:ring-[--hit] text-white",
     D: "bg-[--blue] focus:ring-[--blue] text-white",
-    default: "bg-[--orange] focus:ring-[--gray] text-white",
+    default: "bg-[--yellow] text-[--grey-dark]",
 }

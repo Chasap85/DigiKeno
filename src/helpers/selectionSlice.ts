@@ -64,6 +64,7 @@ export const selectionSlice = createSlice({
                 allPicks.push(action.payload);
                 activeCard.count = activeCard.picks.length;
             }
+            console.log(activeCard?.cardId, activeCard?.count)
         },
     }
 })

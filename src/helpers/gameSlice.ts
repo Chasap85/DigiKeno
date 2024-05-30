@@ -21,19 +21,22 @@ export const gameSlice = createSlice({
     reducers: {
         gameOutput: (state, action: PayloadAction<number[]>) => {
             state.output = action.payload;
-            console.log('gameOutput', action.payload)
         },
         gameHitCount: (state, action: PayloadAction<number>) => {
             state.hits = action.payload;
+        },
+        gameReset: (state) => {
+            state.output = [];
+            state.hits = 0;
         }
-
     }
 })
 
-export const { gameOutput } = gameSlice.actions
+export const { gameOutput, gameReset } = gameSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const currentState = (state: RootState) => state.gameState;
+export const output = (state: RootState) => state.gameState.output;
 
 
 export default gameSlice.reducer
