@@ -1,7 +1,5 @@
-import { useState } from "react";
 import "./App.css";
 import Action from "./components/gameScreen/ActionBoard/Action";
-import ActionBoard from "./components/gameScreen/ActionBoard/ActionBoard";
 import Header from "./components/Header/Header";
 import CardInfo from "./components/gameScreen/CardInfo/CardInfo";
 import Caller from "./components/Caller/Caller";
