@@ -1,16 +1,35 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store/store";
 
-// Define a type for the slice state
 export interface GameState {
-  output: number[];
-  hits: number;
+  output: number[];     // all drawn numbers
+  totalHits: number;    // total winning numbers
+  jackpot: boolean;     // Jackpot flag
+  playSpeed: number;    // speed of play
+  winAmt: number;       // amount of win
+  winTotal: number;     // total winnings
+  winCount: number;     // number of wins
+  winStreak: number;    // number of consecutive wins
+  losses: number;        // number of losses
+  multiplier: number;   // game multiplier
+  playMeter: number;    // total games played
+  animation: boolean;   // animation flag
 }
 
 // Define the initial state using that type
 const initialState: GameState = {
   output: [],
-  hits: 0,
+  totalHits: 0,
+  jackpot: false,
+  playSpeed: 50,
+  winAmt: 0,
+  winTotal: 0,
+  winCount: 0,
+  winStreak: 0,
+  losses: 0,
+  multiplier: 1,
+  playMeter: 0,
+  animation: false,
 };
 
 export const gameSlice = createSlice({
@@ -22,11 +41,11 @@ export const gameSlice = createSlice({
       state.output = action.payload;
     },
     gameHitCount: (state, action: PayloadAction<number>) => {
-      state.hits = action.payload;
+      state.totalHits = action.payload;
     },
     gameReset: (state) => {
       state.output = [];
-      state.hits = 0;
+      state.totalHits = 0;
     },
   },
 });

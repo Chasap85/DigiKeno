@@ -2,12 +2,13 @@ import { Button } from "@headlessui/react";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
 
 //State dependencies
-import { useAppDispatch } from "../../../hooks/hooks";
-import { selectCard } from "../../../helpers/selectionSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { deselectAllCards, selectCard, selectedCardId } from "../../../helpers/selectionSlice";
 
 function CardMenu({ props }) {
   const dispatch = useAppDispatch();
-  const { setShowAll } = props;
+  const cardId = useAppSelector(selectedCardId);
+  const { setShowAll, showAll } = props;
 
   const buttons = ["A", "B", "C", "D"];
   const colors = [
@@ -19,7 +20,8 @@ function CardMenu({ props }) {
 
   // todo: when clicked remove the output themes from game state
   const showAllDisplay = () => {
-    setShowAll(true);
+    dispatch(deselectAllCards());
+    setShowAll(!showAll);
   };
 
   return (
@@ -36,15 +38,14 @@ function CardMenu({ props }) {
         {buttons.map((button, index) => (
           <Button
             key={button}
-            className={`flex justify-center items-center w-32 h-10 font-extrabold cursor-pointer focus:outline focus:drop-shadow-lg
-            focus:outline-none focus:ring focus:ring-offset-2 ${colors[index]}
-            transition-all duration-500 ease-in-out focus:ring-[6px] focus:z-10`}
+            className={`card-btn ${colors[index]}`}
             onClick={() => dispatch(selectCard(button))}
           >
             <span className="">{button}</span>
           </Button>
         ))}
       </div>
+      <div>{cardId}</div>
     </div>
   );
 }

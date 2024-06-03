@@ -1,6 +1,6 @@
 import { generateRandomNumbers } from "../../../helpers/ranGenerator";
 
-import { useAppDispatch } from "../../../hooks/hooks";
+import { useAppDispatch } from "../../../store/hooks";
 import { gameOutput } from "../../../helpers/gameSlice";
 import GamePlayScreen from "./GamePlayScreen";
 
@@ -17,21 +17,13 @@ function Banner({ props }) {
   };
 
   return (
-    <div className="flex grid grid-cols-6 gap-4 p-6 outline outline-[8px] outline-[--grey-dark] rounded">
+    <div className="grid grid-cols-6 gap-4 p-6 outline outline-[8px] outline-[--grey-dark] rounded">
       <div className="col-span-2">
         <div className="gap-3 flex m-6">
-          <button
-            className="flex justify-center items-center mr-4 w-[5rem] h-[5rem] bg-[--bg-color] text-2xl text-[--grey-dark] font-bold active:font-extrabold cursor-pointer
-                                active:transform active:scale-95 transition-transform duration-150 ease-out active:bg-[--hit]
-                                active:text-white outline outline-[4px] outline-[--grey-dark] drop-shadow-md uppercase"
-          >
+          <button className="bet-btn">
             Max Bet
           </button>
-          <button
-            className="flex justify-center items-center w-[5rem] h-[5rem] bg-[--bg-color] text-2xl text-[--grey-dark] font-bold active:font-extrabold cursor-pointer
-                                active:transform active:scale-95 transition-transform duration-150 ease-out active:bg-[--hit]
-                                active:text-white outline outline-[4px] outline-[--grey-dark] drop-shadow-md uppercase"
-          >
+          <button className="bet-btn">
             Bet
           </button>
         </div>
@@ -42,9 +34,7 @@ function Banner({ props }) {
       <div className="flex justify-center items-center">
         <button
           onClick={startDeal}
-          className="bg-[--red] w-[7rem] h-[7rem] text-white font-bold active:font-extrabold cursor-pointer
-                                active:transform active:scale-95 transition-transform duration-150 ease-out active:bg-[--hit]
-                                outline outline-[4px] outline-[--grey-dark] drop-shadow-md uppercase"
+          className="hit-btn"
         >
           Hit
         </button>

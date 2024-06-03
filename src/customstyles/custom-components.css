@@ -1,1 +1,33 @@
 /*  customize Tailwind's component classes to better fit your project's design */
+@layer components {
+    /* BUTTONS */
+  .action-btn {
+    @apply w-20 h-20 m-0 p-0 text-[1.4em] text-[--grey-dark] flex items-center 
+            justify-center rounded-none border-[8px] border-[--grey-dark] 
+            focus:outline-none overflow-hidden whitespace-nowrap hover:bg-[--red] 
+            hover:text-white hover:text-[1.7em];
+  }
+  
+  .card-btn {
+    @apply flex justify-center items-center w-32 h-10 font-extrabold 
+            cursor-pointer focus:outline focus:drop-shadow-lg focus:outline-none 
+            focus:ring-[6px] focus:ring-offset-2 transition-all duration-500 ease-in-out 
+            focus:z-10;
+  }
+
+  .bet-btn {
+    @apply flex justify-center items-center mr-4 w-[5rem] h-[5rem] bg-[--bg-color] 
+            text-2xl text-[--grey-dark] font-bold active:font-extrabold cursor-pointer 
+            active:transform active:scale-95 transition-transform duration-150 ease-out 
+            active:bg-[--hit] active:text-white outline outline-[4px] outline-[--grey-dark] 
+            drop-shadow-md uppercase;
+  }
+
+  .hit-btn {
+    @apply bg-[--red] w-[7rem] h-[7rem] text-white font-bold active:font-extrabold 
+            cursor-pointer active:transform active:scale-95 transition-transform 
+            duration-150 ease-out active:bg-[--hit] outline outline-[4px] 
+            outline-[--grey-dark] drop-shadow-md uppercase;
+  }
+
+}

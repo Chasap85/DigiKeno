@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Button } from "@headlessui/react";
-import { actionBoardThemes } from "../../../customstyles/selectionThemes";
+import { actionBoardThemes } from "../../../constants/selectionThemes";
 
-import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import useGameOutput from "./displayHook";
 import {
   selectNumber,
@@ -10,9 +10,11 @@ import {
   deselectNumber,
   selectedCardId,
   allPicks,
-  deselectCard,
+  deselectAllCards,
+  currentState,
 } from "../../../helpers/selectionSlice";
 import { output } from "../../../helpers/gameSlice";
+import useGameSelection from "../hooks/selectionHook";
 
 /**
  * @description ActionBoard is the keno number board where all the action happens
@@ -28,70 +30,36 @@ import { output } from "../../../helpers/gameSlice";
 function ActionBoard({ props }) {
   // state dependencies
   const dispatch = useAppDispatch();
-  const playerTotalSelection = useAppSelector(allPicks);
   const cardId = useAppSelector(selectedCardId);
-  const currentCardData = useAppSelector(selectedCard);
-  const gameOutput = useAppSelector(output);
 
   const {
-    totalPicks,
-    setTotalPicks,
     showAll,
     setShowAll,
-    setHitPlay,
-    hitPlay,
   } = props;
-  const [theme, setTheme] = useState("");
   const [selectedNumbers, setSelectedNumbers] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(-1);
-
-  /**
-   * @description: Game Selection State Management which helps display all or individual card picks
-   * @var cardId: selected card id used for displaying its picks
-   * @var showAll: boolean used to display all card picks
-   *
-   * FIX: Need a new approach to showing the selection of numbers on the board when gameplay starts
-   */
-  useEffect(() => {
-    if (showAll === true) {
-      console.log("show all");
-      setTheme(actionBoardThemes["default"]);
-      setSelectedNumbers(totalPicks);
-      dispatch(deselectCard());
-      // setCurrentIndex(0);
-    } else if (hitPlay) {
-      console.log("hit play");
-      setCurrentIndex(0);
-    } else if (cardId) {
-      console.log("card ID");
-      setTheme(actionBoardThemes[cardId]);
-      setSelectedNumbers(currentCardData.picks);
-      setShowAll(false);
-    } else {
-      console.log("woops");
-    }
-  }, [cardId, showAll, hitPlay]);
-
-  // Custom hook to manage game output
-  useGameOutput({ gameOutput, setCurrentIndex, currentIndex, setHitPlay });
+  const [theme, setTheme] = useState("");
+  // // Custom hook to manage game selection
+  // useGameSelection({ cardId, setShowAll, showAll, currentCardData, setTheme, setSelectedNumbers, totalPicks });
+  // // Custom hook to manage game output
+  // useGameOutput({ gameOutput, setCurrentIndex, currentIndex, setHitPlay });
 
   /**
    *
-   * @param {*} number
+   * 
    */
   const handlePick = (number) => {
     if (cardId) {
       if (selectedNumbers.includes(number)) {
         dispatch(deselectNumber(number));
         setSelectedNumbers((prev) => prev.filter((n) => n !== number));
-        setTotalPicks((prev) => prev.filter((n) => n !== number));
+        // setTotalPicks((prev) => prev.filter((n) => n !== number));
       } else if (selectedNumbers.length < 10) {
         dispatch(selectNumber(number));
         setSelectedNumbers((prev) => [...prev, number]);
-        if (totalPicks.includes(number)) {
-          setTotalPicks((prev) => prev.filter((n) => n !== number));
-        }
-        setTotalPicks((prev) => [...prev, number]);
+        // if (totalPicks.includes(number)) {
+        //   setTotalPicks((prev) => prev.filter((n) => n !== number));
+        // }
+        // setTotalPicks((prev) => [...prev, number]);
       }
     }
   };
@@ -102,15 +70,8 @@ function ActionBoard({ props }) {
    */
   const renderNumbers = () => {
     const numbers = [];
-    const isSelectedSet = new Set(selectedNumbers);
-    const isDrawnSet = new Set(gameOutput.slice(0, currentIndex + 1));
-    console.log(currentIndex);
 
     for (let i = 1; i <= 80; i++) {
-      const isSelected = isSelectedSet.has(i);
-      const isDrawn = isDrawnSet.has(i);
-      const isCurrentDraw = i === gameOutput[currentIndex];
-      const isHit = isSelected && isDrawn;
 
       if (i == 41) {
         numbers.push(
@@ -125,12 +86,7 @@ function ActionBoard({ props }) {
         <Button
           key={i}
           onClick={() => handlePick(i)}
-          className={`w-20 h-20 m-0 p-0 text-[1.4em] text-[--grey-dark] flex items-center justify-center rounded-none border-[8px]
-            border-[--grey-dark] focus:outline-none overflow-hidden whitespace-nowrap
-            ${isSelected ? `${theme} font-black text-[1.7em]` : "bg-[--bg-color]"}
-            ${isDrawn ? (isHit ? "bg-[--hit]" : "bg-[--red]") : ""} ${isCurrentDraw ? "border-4 border-red-500 !text-white" : ""}
-            ${isHit && isDrawn ? "!bg-[--hit] text-white" : ""}
-            hover:bg-[--red] hover:text-white hover:text-[1.7em]`}
+          className={`action-btn`}
         >
           {i}
         </Button>,

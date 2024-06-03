@@ -2,24 +2,26 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store/store";
 
 export interface CardState {
-  cardId: string | null;
-  picks: number[];
-  count: number;
-  isActive: boolean;
+  cardId: string | null;  // card identifier
+  picks: number[];        // selected numbers
+  count: number;          // number of selected numbers
+  isActive: boolean;      // active card flag
+  hits: number[];         // winning numbers
+  payout: number;         // pay amount
 }
-// Define a type for the slice state
+
 export interface SelectionState {
   cards: CardState[];
-  allPicks: number[];
-}
+  allPicks: number[];  // REVIEW: is this needed?
+} 
 
 // Define the initial state using that type
 const initialState: SelectionState = {
   cards: [
-    { cardId: "A", picks: [], count: 0, isActive: false },
-    { cardId: "B", picks: [], count: 0, isActive: false },
-    { cardId: "C", picks: [], count: 0, isActive: false },
-    { cardId: "D", picks: [], count: 0, isActive: false },
+    { cardId: "A", picks: [], count: 0, isActive: false, hits: [], payout: 0},
+    { cardId: "B", picks: [], count: 0, isActive: false, hits: [], payout: 0},
+    { cardId: "C", picks: [], count: 0, isActive: false, hits: [], payout: 0},
+    { cardId: "D", picks: [], count: 0, isActive: false, hits: [], payout: 0},
   ],
   allPicks: [],
 };
@@ -31,32 +33,27 @@ export const selectionSlice = createSlice({
   reducers: {
     // set the active card
     selectCard: (state, action: PayloadAction<string>) => {
-      const activeCard = action.payload;
       state.cards.forEach((card) => {
-        if (card.cardId === activeCard) {
-          card.isActive = true;
-        } else {
-          card.isActive = false;
-        }
+        card.isActive = card.cardId === action.payload;
       });
     },
-    deselectCard: (state) => {
+    deselectAllCards: (state) => {
       state.cards.forEach((card) => {
         card.isActive = false;
       });
     },
-    // filter the picks array to remove the deselected number
+    // remove number from active card
     deselectNumber: (state, action: PayloadAction<number>) => {
+      const updatedPicks = [];
       const activeCard = state.cards.find((card) => card.isActive);
-
       if (activeCard) {
-        const updatedPicks = activeCard.picks.filter(
-          (pick) => pick !== action.payload,
+        activeCard.picks.filter((pick) => pick !== action.payload,
         );
         activeCard.picks = updatedPicks;
         activeCard.count = updatedPicks.length;
       }
     },
+    // add number to active card
     selectNumber: (state, action: PayloadAction<number>) => {
       const activeCard = state.cards.find((card) => card.isActive);
       const allPicks = state.allPicks;
@@ -74,11 +71,11 @@ export const selectionSlice = createSlice({
   },
 });
 
-export const { selectCard, selectNumber, deselectNumber, deselectCard } =
+export const { selectCard, selectNumber, deselectNumber, deselectAllCards } =
   selectionSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const currentState = (state: RootState) => state.card.cards;
+export const currentState = (state: RootState) => state.card;
 export const selectedCardId = (state: RootState) =>
   state.card.cards.find((card) => card.isActive)?.cardId;
 export const allPicks = (state: RootState) => state.card.allPicks;
