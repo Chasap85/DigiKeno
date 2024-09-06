@@ -1,8 +1,6 @@
 @import "tailwindcss/base";
-@import "./customstyles/custom-base-styles.css";
 
 @import "tailwindcss/components";
-@import "./customstyles/custom-components.css";
 
 @import "tailwindcss/utilities";
 @import "./customstyles/custom-utilities.css";
@@ -12,13 +10,17 @@
   --red: #ce5438;
   --orange: #ff9d19;
   --grey-dark: #354751;
-  --grey: #67696e;
-  --yellow: #eed069;
-  --blue: #1e9efc;
+  --grey: #d9d9d9; 
+  --blue1: #1e9efc;
   --fd-blue: #4d84a4;
   --hit: #646cff;
   --green: #00b585;
-  
+
+  --black: #242611;
+  --blue: #079df9;
+  --orange: #f26b1d;
+  --yellow: #ffe607;
+
   font-family: "acumin-variable", sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -32,7 +34,7 @@
 }
 
 body {
-  background-color: var(--bg-color);
+  background-color: white;
   height: 100vh;
 }
 
@@ -79,25 +81,7 @@ h3 {
 }
 
 /* Buttons */
-button {
-  border-radius: 2px;
-  padding: 0.6em 1.2em;
-  font-variation-settings:
-    "slnt" 0,
-    "wght" 700,
-    "wdth" 90;
-  font-size: 1.2em;
-  font-family: inherit;
-  cursor: cell;
-  transition: border-color 0.3s;
-  transition: font-size 0.2s;
-}
-button:hover {
-  border-color: var(--red);
-}
-button:active {
-  font-variation-settings: "wght" 900;
-}
+
 
 /* button:focus,
 button:focus-visible {
@@ -115,7 +99,7 @@ button:focus-visible {
   a:hover {
     color: #747bff;
   }
-  button {
-    background-color: var(--bg-color);
-  }
+  /* button {
+    background-color: white;
+  } */
 }

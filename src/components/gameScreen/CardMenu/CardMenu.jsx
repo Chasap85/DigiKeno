@@ -2,8 +2,9 @@ import { Button } from "@headlessui/react";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
 
 //State dependencies
-import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
-import { currentState, selectCard } from "../../../helpers/selectionSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
+import { selectCard } from "../../../slices/selectionSlice";
+import { resetRevealedNumbers } from "../../../slices/gameSlice";
 
 function CardMenu({ props }) {
   const dispatch = useAppDispatch();
@@ -19,8 +20,10 @@ function CardMenu({ props }) {
 
   const showAllDisplay = () => {
     setShowAll(!showAll);
+    dispatch(resetRevealedNumbers());
   }
-
+  
+  // NOTE: Change showAll to a reset function for the board
   return (
     <div className="flex justify-center items-center gap-2 mt-6">
       <div className="m-1 rounded-full bg-[--grey]">
