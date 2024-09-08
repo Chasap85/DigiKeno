@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../redux-store/store";
-import { dealNumbers } from "../hooks/dealNumbers";
-import { revealSet } from "./gameSlice";
 
 export interface CardState {
   cardId: string | null;
@@ -66,7 +64,7 @@ export const selectionSlice = createSlice({
 
       if (activeCard) {
         const updatedPicks = activeCard.picks.filter(
-          (pick) => pick !== action.payload
+          (pick) => pick !== action.payload,
         );
         activeCard.picks = updatedPicks;
         activeCard.count = updatedPicks.length;
@@ -91,22 +89,22 @@ export const selectionSlice = createSlice({
       state.showAll = action.payload;
     },
     clearCardHits: (state, action: PayloadAction<CardState[]>) => {
-      state.cards = action.payload.map(card => ({...card, hits: 0}));
+      state.cards = action.payload.map((card) => ({ ...card, hits: 0 }));
       state.dealIndex = -1;
       state.revealedNumbers = [];
     },
     revealNextNumber: (state, action: PayloadAction<number[]>) => {
-        if (state.dealIndex < action.payload.length -1) {
-          state.dealIndex++;
-          const currentNumber = action.payload[state.dealIndex];
-          state.revealedNumbers.push(currentNumber)
-          state.cards.forEach(card => {
-            if (card.picks.includes(currentNumber)) {
-              card.hits++;
-            }
-          });
-        }
-      },
+      if (state.dealIndex < action.payload.length - 1) {
+        state.dealIndex++;
+        const currentNumber = action.payload[state.dealIndex];
+        state.revealedNumbers.push(currentNumber);
+        state.cards.forEach((card) => {
+          if (card.picks.includes(currentNumber)) {
+            card.hits++;
+          }
+        });
+      }
+    },
     setCardHits: (state, action: PayloadAction<CardHits>) => {
       const { cardId, hits } = action.payload;
       const cards = state.cards;

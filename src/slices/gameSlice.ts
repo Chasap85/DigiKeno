@@ -39,29 +39,10 @@ export const gameSlice = createSlice({
       // index for revealing newly dealt numbers. Resets it back
       state.dealIndex = -1;
     },
-    revealSet: (state, action: PayloadAction<number>) => {
-      state.revealedNumbers.push(action.payload);
-      console.log("HELLO")
-    },
-    // revealNextNumber: (state, action: PayloadAction<CardState[]>) => {
-    //   if (state.dealIndex < state.dealtNumbers.length - 1) {
-    //     state.dealIndex++;
-    //     const currentNumber = state.dealtNumbers[state.dealIndex];
-    //     action.payload.forEach(card => {
-    //       if (card.picks.includes(currentNumber)) {
-
-    //       }
-    //     });
-    //   }
-    // },
-    resetRevealedNumbers: (state) => {
-      state.revealedNumbers = [];
-    },
   },
 });
 
-export const { gameOutput, setDealtNumbers, resetRevealedNumbers, revealSet } =
-  gameSlice.actions;
+export const { gameOutput, setDealtNumbers } = gameSlice.actions;
 
 export const currentState = (state: RootState) => state.gameState;
 export const kenoBoard = (state: RootState) => state.gameState.kenoBoard;

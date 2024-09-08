@@ -4,7 +4,6 @@ import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
 //State dependencies
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import { selectCard } from "../../../slices/selectionSlice";
-import { resetRevealedNumbers } from "../../../slices/gameSlice";
 
 function CardMenu({ props }) {
   const dispatch = useAppDispatch();
@@ -15,20 +14,21 @@ function CardMenu({ props }) {
     "bg-[--red] text-white focus:ring-[--red] active:ring-[--red]",
     "bg-[--hit] focus:ring-[--hit] text-white",
     "bg-[--green] focus:ring-[--green] text-white",
-    "bg-[--blue] focus:ring-[--blue] text-white"
+    "bg-[--blue] focus:ring-[--blue] text-white",
   ];
 
   const showAllDisplay = () => {
     setShowAll(!showAll);
-    dispatch(resetRevealedNumbers());
-  }
-  
+  };
+
   // NOTE: Change showAll to a reset function for the board
   return (
     <div className="flex justify-center items-center gap-2 mt-6">
       <div className="m-1 rounded-full bg-[--grey]">
-        <button className="cursor-pointer flex p-2 rounded-full bg-white outline outline-[--hit] outline-[3px] drop-shadow-md"
-          onClick={showAllDisplay}>
+        <button
+          className="cursor-pointer flex p-2 rounded-full bg-white outline outline-[--hit] outline-[3px] drop-shadow-md"
+          onClick={showAllDisplay}
+        >
           <AdjustmentsHorizontalIcon className="h-12 w-12 text-[--grey-dark]" />
         </button>
       </div>

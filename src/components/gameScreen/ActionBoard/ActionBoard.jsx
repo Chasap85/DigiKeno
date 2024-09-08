@@ -9,10 +9,7 @@ import {
   selectedCardId,
   deselectCard,
 } from "../../../slices/selectionSlice";
-import {
-  kenoBoard,
-  revealedNumbers,
-} from "../../../slices/gameSlice";
+import { kenoBoard, revealedNumbers } from "../../../slices/gameSlice";
 import Cell from "./Cell";
 
 /**

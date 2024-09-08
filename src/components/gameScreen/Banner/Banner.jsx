@@ -14,7 +14,7 @@ export default function Banner({ props }) {
       dispatch(clearCardHits(playerCards));
       dispatch(dealNumbers(playerCards));
     } else {
-        alert("Pick more than 3 numbers for at least one Card!")
+      alert("Pick more than 3 numbers for at least one Card!");
     }
   };
 
