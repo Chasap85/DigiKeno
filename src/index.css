@@ -48,47 +48,6 @@ a:hover {
   color: #ce5438;
 }
 
-/* Text */
-p {
-  color: white;
-  font-size: 1.3em;
-  text-transform: uppercase;
-  font-variation-settings:
-    "slnt" 0,
-    "wght" 800,
-    "wdth" 80;
-}
-
-h1 {
-  color: var(--grey-dark);
-  font-variation-settings:
-    "slnt" -12,
-    "wght" 300,
-    "wdth" 115;
-  font-size: 6em;
-  line-height: 1.1;
-}
-h3 {
-  text-transform: uppercase;
-  font-variation-settings:
-    "slnt" 0,
-    "wght" 820,
-    "wdth" 100;
-  color: var(--grey-dark);
-  font-size: 1.8em;
-  line-height: 1.1;
-  font-weight: 300;
-}
-
-/* Buttons */
-
-/* button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
-
-/* custom stylings */
-
 /* Color Scheme/Settings */
 @media (prefers-color-scheme: light) {
   :root {
@@ -98,7 +57,4 @@ button:focus-visible {
   a:hover {
     color: #747bff;
   }
-  /* button {
-    background-color: white;
-  } */
 }

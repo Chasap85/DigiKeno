@@ -1,11 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../redux-store/store";
+import { calculateWinnings } from "../game/paytable";
 
 export interface CardState {
   cardId: string | null;
   picks: number[];
   count: number;
   hits: number;
+  bet: number;
+  pay: number;
   isActive: boolean;
 }
 
@@ -24,10 +27,42 @@ interface CardHits {
 
 const initialState: SelectionState = {
   cards: [
-    { cardId: "A", picks: [], count: 0, hits: 0, isActive: false },
-    { cardId: "B", picks: [], count: 0, hits: 0, isActive: false },
-    { cardId: "C", picks: [], count: 0, hits: 0, isActive: false },
-    { cardId: "D", picks: [], count: 0, hits: 0, isActive: false },
+    {
+      cardId: "A",
+      picks: [],
+      count: 0,
+      hits: 0,
+      bet: 3,
+      isActive: false,
+      pay: 0,
+    },
+    {
+      cardId: "B",
+      picks: [],
+      count: 0,
+      hits: 0,
+      bet: 3,
+      isActive: false,
+      pay: 0,
+    },
+    {
+      cardId: "C",
+      picks: [],
+      count: 0,
+      hits: 0,
+      bet: 3,
+      isActive: false,
+      pay: 0,
+    },
+    {
+      cardId: "D",
+      picks: [],
+      count: 0,
+      hits: 0,
+      bet: 3,
+      isActive: false,
+      pay: 0,
+    },
   ],
   allPicks: [],
   showAll: false,
@@ -88,9 +123,16 @@ export const selectionSlice = createSlice({
     setShowAll: (state, action: PayloadAction<boolean>) => {
       state.showAll = action.payload;
     },
-    clearCardHits: (state, action: PayloadAction<CardState[]>) => {
-      state.cards = action.payload.map((card) => ({ ...card, hits: 0 }));
+    clearCards: (state, action: PayloadAction<CardState[]>) => {
+      state.cards = action.payload.map((card) => ({
+        ...card,
+        hits: 0,
+        pay: 0,
+      }));
       state.dealIndex = -1;
+      state.revealedNumbers = [];
+    },
+    clearBoard: (state) => {
       state.revealedNumbers = [];
     },
     revealNextNumber: (state, action: PayloadAction<number[]>) => {
@@ -101,6 +143,7 @@ export const selectionSlice = createSlice({
         state.cards.forEach((card) => {
           if (card.picks.includes(currentNumber)) {
             card.hits++;
+            card.pay = calculateWinnings(card.count, card.hits, card.bet);
           }
         });
       }
@@ -123,7 +166,8 @@ export const {
   deselectNumber,
   deselectCard,
   setShowAll,
-  clearCardHits,
+  clearCards,
+  clearBoard,
   revealNextNumber,
   setCardHits,
 } = selectionSlice.actions;

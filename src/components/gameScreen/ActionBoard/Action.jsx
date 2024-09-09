@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CardMenu from "../CardMenu/CardMenu";
 import ActionBoard from "./ActionBoard";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../game/reduxHooks";
 import { allPicks } from "../../../slices/selectionSlice";
 import Banner from "../Banner/Banner";
 

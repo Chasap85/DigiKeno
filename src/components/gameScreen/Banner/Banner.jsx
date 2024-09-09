@@ -1,8 +1,9 @@
-import { dealNumbers } from "../../../hooks/dealNumbers";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
-import { allPicks, cards, clearCardHits } from "../../../slices/selectionSlice";
+import { dealNumbers } from "../../../game/dealNumbers";
+import { useAppDispatch, useAppSelector } from "../../../game/reduxHooks";
+import { allPicks, cards, clearCards } from "../../../slices/selectionSlice";
 
 export default function Banner({ props }) {
+  let rounds = 1000;
   const { showAll, setShowAll } = props;
   const playerPicks = useAppSelector(allPicks);
   const playerCards = useAppSelector(cards);
@@ -11,7 +12,7 @@ export default function Banner({ props }) {
   const handleDeal = () => {
     if (playerPicks.length > 3) {
       setShowAll(!showAll);
-      dispatch(clearCardHits(playerCards));
+      dispatch(clearCards(playerCards));
       dispatch(dealNumbers(playerCards));
     } else {
       alert("Pick more than 3 numbers for at least one Card!");

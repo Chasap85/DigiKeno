@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { actionBoardThemes } from "../../../customstyles/selectionThemes";
 
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../game/reduxHooks";
 import {
   selectNumber,
   selectedCard,
@@ -56,27 +56,26 @@ function ActionBoard({ props }) {
 
   return (
     <>
-      <div className="grid grid-cols-10 grid-flow-row gap-2 mt-5 mb-8 p-2 rounded bg-[--grey]">
+      <div className="grid grid-cols-10 grid-flow-row gap-2 mt-5 mb-8 p-2 rounded outline outline-[--black] outline-4">
         {numberBoard &&
           numberBoard.map((value, index) => {
             const number = index + 1;
-            const isRevealed = revealedNum.includes(number);
+            const isDealt = revealedNum.includes(number);
             const isCardSelection = selectedNumbers.includes(number);
-            const isHit = isCardSelection && isRevealed;
+            const isHit = isCardSelection && isDealt;
 
             return (
               <Cell
                 key={index}
                 number={number}
-                value={value}
                 theme={
-                  isRevealed
+                  isDealt
                     ? isHit
-                      ? "bg-[--hit]"
-                      : "bg-[--red]" // Hit or miss
+                      ? "bg-[--yellow] text-[--red] outline outline-4 outline-[--red]"
+                      : "bg-[--red] text-white" // Hit or miss
                     : isCardSelection
                       ? theme
-                      : "default" // Player selected or default
+                      : "default" // Card theme or default for all cards
                 }
                 onClick={() => handlePick(number)}
               />

@@ -36,8 +36,6 @@ export const gameSlice = createSlice({
     },
     setDealtNumbers: (state, action: PayloadAction<number[]>) => {
       state.dealtNumbers = action.payload;
-      // index for revealing newly dealt numbers. Resets it back
-      state.dealIndex = -1;
     },
   },
 });
