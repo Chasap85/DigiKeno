@@ -1,10 +1,13 @@
 import { Button } from "@headlessui/react";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
-
-//State dependencies
-import { useAppDispatch, useAppSelector } from "../../../game/reduxHooks";
+import { useAppDispatch } from "../../../game/reduxHooks";
 import { clearBoard, selectCard } from "../../../slices/selectionSlice";
 
+/**
+ * Card Menu is a selection menu to populate card numbers
+ * @param {*} showAll - holds true or false value for display single card numbers or all card numbers
+ * @param {*} setShowAll - setter for show all state
+ */
 function CardMenu({ props }) {
   const dispatch = useAppDispatch();
   const { showAll, setShowAll } = props;
@@ -22,7 +25,6 @@ function CardMenu({ props }) {
     dispatch(clearBoard());
   };
 
-  // NOTE: Change showAll to a reset function for the board
   return (
     <div className="flex justify-center items-center gap-2">
       <div className="m-1 rounded-full bg-[--grey]">

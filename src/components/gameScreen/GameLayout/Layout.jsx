@@ -5,7 +5,7 @@ function Layout() {
   return (
     <div className="flex flex-row">
       {/* card info */}
-      <div className="p-4">
+      <div className="p-4 mt-24">
         <CardInfo />
       </div>
       {/* action board */}

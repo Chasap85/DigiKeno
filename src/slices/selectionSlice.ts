@@ -18,6 +18,7 @@ export interface SelectionState {
   showAll: boolean;
   dealIndex: number;
   revealedNumbers: number[];
+  maxBet: number;
 }
 
 interface CardHits {
@@ -32,7 +33,7 @@ const initialState: SelectionState = {
       picks: [],
       count: 0,
       hits: 0,
-      bet: 3,
+      bet: 0,
       isActive: false,
       pay: 0,
     },
@@ -41,7 +42,7 @@ const initialState: SelectionState = {
       picks: [],
       count: 0,
       hits: 0,
-      bet: 3,
+      bet: 0,
       isActive: false,
       pay: 0,
     },
@@ -50,7 +51,7 @@ const initialState: SelectionState = {
       picks: [],
       count: 0,
       hits: 0,
-      bet: 3,
+      bet: 0,
       isActive: false,
       pay: 0,
     },
@@ -59,7 +60,7 @@ const initialState: SelectionState = {
       picks: [],
       count: 0,
       hits: 0,
-      bet: 3,
+      bet: 0,
       isActive: false,
       pay: 0,
     },
@@ -68,6 +69,7 @@ const initialState: SelectionState = {
   showAll: false,
   dealIndex: -1,
   revealedNumbers: [],
+  maxBet: 5,
 };
 
 export const selectionSlice = createSlice({
@@ -140,6 +142,7 @@ export const selectionSlice = createSlice({
         state.dealIndex++;
         const currentNumber = action.payload[state.dealIndex];
         state.revealedNumbers.push(currentNumber);
+        // update hits while we're at it
         state.cards.forEach((card) => {
           if (card.picks.includes(currentNumber)) {
             card.hits++;
@@ -157,6 +160,26 @@ export const selectionSlice = createSlice({
         }
       });
     },
+    eraseAll: (state) => {
+      state.cards.forEach((card) => {
+        card.bet = 0;
+        card.picks = [];
+      });
+      state.allPicks = [];
+      state.revealedNumbers = [];
+    },
+    betOne: (state) => {
+      state.cards.forEach((card) => {
+        if (card.bet + 1 <= state.maxBet) {
+          card.bet = card.bet + 1;
+        }
+      });
+    },
+    betMax: (state) => {
+      state.cards.forEach((card) => {
+        card.bet = 5;
+      });
+    },
   },
 });
 
@@ -170,6 +193,9 @@ export const {
   clearBoard,
   revealNextNumber,
   setCardHits,
+  eraseAll,
+  betMax,
+  betOne,
 } = selectionSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
