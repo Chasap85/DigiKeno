@@ -1,5 +1,9 @@
 import { useAppSelector } from "../../../store/reduxHooks";
-import { playerCredits, wager, winnings } from "../../../store/slices/selectors";
+import {
+  playerCredits,
+  wager,
+  winnings,
+} from "../../../store/slices/selectors";
 
 function Display() {
   const credits = useAppSelector(playerCredits);

@@ -1,4 +1,4 @@
-import { setDealtNumbers } from "../store/slices/deal";
+import { setDealtNumbers } from "../store/slices/gameSlice";
 import { displayWinnings, revealNextNumber } from "../store/slices/gameSlice";
 import { cards } from "../store/slices/selectors";
 

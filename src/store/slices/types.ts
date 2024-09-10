@@ -14,15 +14,15 @@ export interface CardHits {
 }
 
 export interface GameState {
-    cards: CardState[];
-    allPicks: number[];
-    showAll: boolean;
-    dealIndex: number;
-    revealedNumbers: number[];
-    maxBet: number;
-    credits: number;
-    winnings: number;
-    wager: number;
-    kenoBoard: number[];
-    dealtNumbers: number[];
-  }
+  cards: CardState[];
+  allPicks: number[];
+  showAll: boolean;
+  dealIndex: number;
+  revealedNumbers: number[];
+  maxBet: number;
+  credits: number;
+  winnings: number;
+  wager: number;
+  kenoBoard: number[];
+  dealtNumbers: number[];
+}

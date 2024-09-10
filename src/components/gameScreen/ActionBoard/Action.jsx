@@ -9,16 +9,21 @@ import {
   eraseAll,
   throwBet,
 } from "../../../store/slices/gameSlice";
-import { allPicks, cards, playerCredits, wager } from "../../../store/slices/selectors";
+import {
+  allPicks,
+  cards,
+  playerCredits,
+  wager,
+} from "../../../store/slices/selectors";
 import Banner from "../Banner/Banner";
 import { dealNumbers } from "../../../game/dealNumbers";
 
 function Action() {
   const dispatch = useAppDispatch();
   const totalPicks = useAppSelector(allPicks);
-  const credits = useAppSelector(playerCredits)
+  const credits = useAppSelector(playerCredits);
   const playerCards = useAppSelector(cards);
-  const wagerAmt = useAppSelector(wager)
+  const wagerAmt = useAppSelector(wager);
   const [showAll, setShowAll] = useState(false);
   const props = { totalPicks, showAll, setShowAll };
 
@@ -35,7 +40,7 @@ function Action() {
   const handlePlay = () => {
     if (totalPicks.length > 3 && credits > wagerAmt) {
       setShowAll(!showAll);
-      dispatch(throwBet())
+      dispatch(throwBet());
       dispatch(clearCards(playerCards));
       dispatch(dealNumbers(playerCards));
     } else {

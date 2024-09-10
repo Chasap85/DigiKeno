@@ -12,5 +12,4 @@ export const winnings = (state: RootState) => state.keno.winnings;
 export const wager = (state: RootState) => state.keno.wager;
 export const kenoBoard = (state: RootState) => state.keno.kenoBoard;
 export const dealtNumbers = (state: RootState) => state.keno.dealtNumbers;
-export const revealedNumbers = (state: RootState) =>
-  state.keno.revealedNumbers;
+export const revealedNumbers = (state: RootState) => state.keno.revealedNumbers;

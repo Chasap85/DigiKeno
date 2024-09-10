@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { RootState } from "../store";
 import cardReducers from "./reducers/cardReducers";
 import gameReducers from "./reducers/gameReducers";
 import betReducers from "./reducers/betReducers";
@@ -7,7 +6,6 @@ import { initialState } from "./constants";
 
 export const selectionSlice = createSlice({
   name: "keno",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     ...cardReducers,
@@ -31,6 +29,7 @@ export const {
   betOne,
   throwBet,
   displayWinnings,
+  setDealtNumbers,
 } = selectionSlice.actions;
 
 export default selectionSlice.reducer;
