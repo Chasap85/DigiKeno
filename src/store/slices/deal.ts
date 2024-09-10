@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../redux-store/store";
-import { CardState } from "./selectionSlice";
+import type { RootState } from "../store";
+import { CardState } from "./gameSlice";
 
 // Define a type for the slice state
 export interface GameState {
   output: number[];
   hits: number;
-  kenoBoard: number[];
-  dealtNumbers: number[];
+ 
+  
   revealedNumbers: number[];
   dealIndex: number;
 }
@@ -16,8 +16,6 @@ export interface GameState {
 const initialState: GameState = {
   output: [],
   hits: 0,
-  kenoBoard: new Array(80).fill(0),
-  dealtNumbers: [],
   revealedNumbers: [],
   dealIndex: -1,
 };

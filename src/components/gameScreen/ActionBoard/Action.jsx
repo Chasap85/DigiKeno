@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CardMenu from "../CardMenu/CardMenu";
 import ActionBoard from "./ActionBoard";
-import { useAppDispatch, useAppSelector } from "../../../game/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../store/reduxHooks";
 import {
   allPicks,
   betMax,
@@ -12,7 +12,7 @@ import {
   playerCredits,
   throwBet,
   wager,
-} from "../../../slices/selectionSlice";
+} from "../../../store/slices/gameSlice";
 import Banner from "../Banner/Banner";
 import { dealNumbers } from "../../../game/dealNumbers";
 

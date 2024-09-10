@@ -1,7 +1,7 @@
 import { Button } from "@headlessui/react";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
-import { useAppDispatch } from "../../../game/reduxHooks";
-import { clearBoard, selectCard } from "../../../slices/selectionSlice";
+import { useAppDispatch } from "../../../store/reduxHooks";
+import { clearBoard, selectCard } from "../../../store/slices/gameSlice";
 
 /**
  * Card Menu is a selection menu to populate card numbers

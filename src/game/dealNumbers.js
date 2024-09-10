@@ -1,5 +1,5 @@
-import { setDealtNumbers } from "../slices/gameSlice";
-import { cards, displayWinnings, revealNextNumber } from "../slices/selectionSlice";
+import { setDealtNumbers } from "../store/slices/deal";
+import { cards, displayWinnings, revealNextNumber } from "../store/slices/gameSlice";
 
 /**
  *  Deal 15 numbers

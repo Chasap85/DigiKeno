@@ -1,11 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import SelectionReducer from "../slices/selectionSlice";
-import GameStateReducer from "../slices/gameSlice";
+import GameReducer from "./slices/gameSlice";
 
 export const store = configureStore({
   reducer: {
-    card: SelectionReducer,
-    gameState: GameStateReducer,
+    keno: GameReducer,
   },
 });
 

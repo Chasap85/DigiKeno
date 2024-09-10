@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { actionBoardThemes } from "../../../customstyles/selectionThemes";
 
-import { useAppDispatch, useAppSelector } from "../../../game/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../store/reduxHooks";
 import {
   selectNumber,
   selectedCard,
   deselectNumber,
   selectedCardId,
   deselectCard,
-} from "../../../slices/selectionSlice";
-import { kenoBoard, revealedNumbers } from "../../../slices/gameSlice";
+} from "../../../store/slices/gameSlice";
+import { kenoBoard } from "../../../store/slices/selectors";
 import Cell from "./Cell";
 
 /**
