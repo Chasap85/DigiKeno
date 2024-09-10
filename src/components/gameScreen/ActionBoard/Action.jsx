@@ -9,6 +9,9 @@ import {
   cards,
   clearCards,
   eraseAll,
+  playerCredits,
+  throwBet,
+  wager,
 } from "../../../slices/selectionSlice";
 import Banner from "../Banner/Banner";
 import { dealNumbers } from "../../../game/dealNumbers";
@@ -16,7 +19,9 @@ import { dealNumbers } from "../../../game/dealNumbers";
 function Action() {
   const dispatch = useAppDispatch();
   const totalPicks = useAppSelector(allPicks);
+  const credits = useAppSelector(playerCredits)
   const playerCards = useAppSelector(cards);
+  const wagerAmt = useAppSelector(wager)
   const [showAll, setShowAll] = useState(false);
   const props = { totalPicks, showAll, setShowAll };
 
@@ -31,8 +36,9 @@ function Action() {
     dispatch(betMax());
   };
   const handlePlay = () => {
-    if (totalPicks.length > 3) {
+    if (totalPicks.length > 3 && credits > wagerAmt) {
       setShowAll(!showAll);
+      dispatch(throwBet())
       dispatch(clearCards(playerCards));
       dispatch(dealNumbers(playerCards));
     } else {
@@ -45,7 +51,6 @@ function Action() {
       <CardMenu props={props} />
       <ActionBoard props={props} />
       <Banner
-        props={props}
         onEraseAll={handleEraseAll}
         onBet1={handleBet1}
         onBetMax={handleBetMax}

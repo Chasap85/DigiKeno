@@ -1,5 +1,6 @@
 import Action from "../ActionBoard/Action";
 import CardInfo from "../CardInfo/CardInfo";
+import Display from "../Display/Display";
 
 function Layout() {
   return (
@@ -12,6 +13,7 @@ function Layout() {
       <div>
         <Action />
       </div>
+      <Display />
     </div>
   );
 }

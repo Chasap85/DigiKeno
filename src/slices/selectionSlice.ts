@@ -19,6 +19,9 @@ export interface SelectionState {
   dealIndex: number;
   revealedNumbers: number[];
   maxBet: number;
+  credits: number;
+  winnings: number;
+  wager: number;
 }
 
 interface CardHits {
@@ -70,6 +73,9 @@ const initialState: SelectionState = {
   dealIndex: -1,
   revealedNumbers: [],
   maxBet: 5,
+  credits: 1000,
+  winnings: 0,
+  wager: 0,
 };
 
 export const selectionSlice = createSlice({
@@ -133,6 +139,7 @@ export const selectionSlice = createSlice({
       }));
       state.dealIndex = -1;
       state.revealedNumbers = [];
+      state.winnings = 0;
     },
     clearBoard: (state) => {
       state.revealedNumbers = [];
@@ -167,19 +174,28 @@ export const selectionSlice = createSlice({
       });
       state.allPicks = [];
       state.revealedNumbers = [];
+      state.wager = 0;
     },
     betOne: (state) => {
       state.cards.forEach((card) => {
         if (card.bet + 1 <= state.maxBet) {
           card.bet = card.bet + 1;
+          state.wager += 1;
         }
       });
     },
     betMax: (state) => {
       state.cards.forEach((card) => {
         card.bet = 5;
+        state.wager += 5
       });
     },
+    throwBet: (state) => {
+        state.credits -= state.wager;
+    },
+    displayWinnings: (state) => {
+        const total = state.cards.reduce((total, card) => total + card.pay, 0);
+    }
   },
 });
 
@@ -196,6 +212,8 @@ export const {
   eraseAll,
   betMax,
   betOne,
+  throwBet,
+  displayWinnings,
 } = selectionSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
@@ -206,5 +224,8 @@ export const allPicks = (state: RootState) => state.card.allPicks;
 export const selectedCard = (state: RootState) =>
   state.card.cards.find((card) => card.isActive);
 export const isShowAll = (state: RootState) => state.card.showAll;
+export const playerCredits = (state: RootState) => state.card.credits;
+export const winnings = (state: RootState) => state.card.winnings;
+export const wager = (state: RootState) => state.card.wager;
 
 export default selectionSlice.reducer;

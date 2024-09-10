@@ -37,6 +37,7 @@ export const gameSlice = createSlice({
     setDealtNumbers: (state, action: PayloadAction<number[]>) => {
       state.dealtNumbers = action.payload;
     },
+    
   },
 });
 
