@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../../store/reduxHooks";
-import { cards } from "../../../store/slices/gameSlice";
+import { cards } from "../../../store/slices/selectors";
 
 function CardInfo() {
   const cardData = useAppSelector(cards);

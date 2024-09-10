@@ -4,11 +4,10 @@ import { actionBoardThemes } from "../../../customstyles/selectionThemes";
 import { useAppDispatch, useAppSelector } from "../../../store/reduxHooks";
 import {
   selectNumber,
-  selectedCard,
   deselectNumber,
-  selectedCardId,
   deselectCard,
 } from "../../../store/slices/gameSlice";
+import { selectedCard, selectedCardId } from "../../../store/slices/selectors";
 import { kenoBoard } from "../../../store/slices/selectors";
 import Cell from "./Cell";
 
@@ -23,7 +22,7 @@ function ActionBoard({ props }) {
   const cardId = useAppSelector(selectedCardId);
   const currentCardData = useAppSelector(selectedCard);
   const numberBoard = useAppSelector(kenoBoard);
-  const revealedNum = useAppSelector((state) => state.card.revealedNumbers);
+  const revealedNum = useAppSelector((state) => state.keno.revealedNumbers);
 
   const { totalPicks, showAll, setShowAll } = props;
   const [theme, setTheme] = useState("");

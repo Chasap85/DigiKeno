@@ -3,16 +3,13 @@ import CardMenu from "../CardMenu/CardMenu";
 import ActionBoard from "./ActionBoard";
 import { useAppDispatch, useAppSelector } from "../../../store/reduxHooks";
 import {
-  allPicks,
   betMax,
   betOne,
-  cards,
   clearCards,
   eraseAll,
-  playerCredits,
   throwBet,
-  wager,
 } from "../../../store/slices/gameSlice";
+import { allPicks, cards, playerCredits, wager } from "../../../store/slices/selectors";
 import Banner from "../Banner/Banner";
 import { dealNumbers } from "../../../game/dealNumbers";
 
