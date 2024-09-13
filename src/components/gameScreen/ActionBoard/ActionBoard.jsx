@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { actionBoardThemes } from "../../../customstyles/selectionThemes";
+import { motion } from "framer-motion";
 
 import { useAppDispatch, useAppSelector } from "../../../store/reduxHooks";
 import {
@@ -54,34 +55,38 @@ function ActionBoard({ props }) {
   };
 
   return (
-    <>
-      <div className="grid grid-cols-10 grid-flow-row gap-2 mt-5 mb-8 p-2 rounded outline outline-[--black] outline-4">
-        {numberBoard &&
-          numberBoard.map((value, index) => {
-            const number = index + 1;
-            const isDealt = revealedNum.includes(number);
-            const isCardSelection = selectedNumbers.includes(number);
-            const isHit = isCardSelection && isDealt;
+    <div className="p-8 bg-gradient-to-br from-gray-900 to-indigo-900 rounded-xl shadow-2xl">
+    <motion.div 
+      className="grid grid-cols-10 gap-3"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      {numberBoard && numberBoard.map((value, index) => {
+        const number = index + 1;
+        const isDealt = revealedNum.includes(number);
+        const isCardSelection = selectedNumbers.includes(number);
+        const isHit = isCardSelection && isDealt;
 
-            return (
-              <Cell
-                key={index}
-                number={number}
-                theme={
-                  isDealt
-                    ? isHit
-                      ? "bg-[--yellow] text-[--red] outline outline-4 outline-[--red]"
-                      : "bg-[--red] text-white" // Hit or miss
-                    : isCardSelection
-                      ? theme
-                      : "default" // Card theme or default for all cards
-                }
-                onClick={() => handlePick(number)}
-              />
-            );
-          })}
-      </div>
-    </>
+        return (
+          <Cell
+            key={index}
+            number={number}
+            theme={
+              isDealt
+                ? isHit
+                  ? "hit"
+                  : "dealt"
+                : isCardSelection
+                  ? "selected"
+                  : "default"
+            }
+            onClick={() => handlePick(number)}
+          />
+        );
+      })}
+    </motion.div>
+  </div>
   );
 }
 

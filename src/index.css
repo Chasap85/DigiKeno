@@ -34,7 +34,7 @@
 }
 
 body {
-  background-color: white;
+  background: linear-gradient(to bottom right, #4c1d95, #312e81);
   height: 100vh;
 }
 

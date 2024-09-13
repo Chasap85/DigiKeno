@@ -5,6 +5,8 @@ import { calculateWinnings } from "../../../game/paytable";
 const gameReducers = {
   clearBoard: (state: GameState) => {
     state.revealedNumbers = [];
+    // clear winnings while we're at it
+    state.winnings = 0;
   },
   setDealtNumbers: (state: GameState, action: PayloadAction<number[]>) => {
     state.dealtNumbers = action.payload;
@@ -24,8 +26,11 @@ const gameReducers = {
     }
   },
   displayWinnings: (state: GameState) => {
-    const total = state.cards.reduce((total, card) => total + card.pay, 0);
+    state.winnings = state.cards.reduce((total, card) => total + card.pay, 0);
   },
+  updatePlayerCredits: (state: GameState) => {
+    state.credits += state.winnings;
+  }
 };
 
 export default gameReducers;

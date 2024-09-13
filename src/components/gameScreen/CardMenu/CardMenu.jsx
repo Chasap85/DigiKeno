@@ -1,7 +1,10 @@
 import { Button } from "@headlessui/react";
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
-import { useAppDispatch } from "../../../store/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../store/reduxHooks";
 import { clearBoard, selectCard } from "../../../store/slices/gameSlice";
+import { selectedCardId } from "../../../store/slices/selectors";
 
 /**
  * Card Menu is a selection menu to populate card numbers
@@ -11,44 +14,73 @@ import { clearBoard, selectCard } from "../../../store/slices/gameSlice";
 function CardMenu({ props }) {
   const dispatch = useAppDispatch();
   const { showAll, setShowAll } = props;
+  const [selectedButton, setSelectedButton] = useState(null);
+  
+  // Assuming you have a selector for the currently active card in your Redux store
+  const activeCard = useAppSelector(selectedCardId);
+
+  useEffect(() => {
+    setSelectedButton(activeCard);
+  }, [activeCard]);
 
   const buttons = ["A", "B", "C", "D"];
   const colors = [
-    "bg-[--red] text-white focus:ring-[--red] active:ring-[--red]",
-    "bg-[--hit] focus:ring-[--hit] text-white",
-    "bg-[--green] focus:ring-[--green] text-white",
-    "bg-[--blue] focus:ring-[--blue] text-white",
+    "bg-red-500 hover:bg-red-600",
+    "bg-yellow-500 hover:bg-yellow-600",
+    "bg-green-500 hover:bg-green-600",
+    "bg-blue-500 hover:bg-blue-600",
   ];
 
   const resetBoard = () => {
     setShowAll(!showAll);
     dispatch(clearBoard());
+    setSelectedButton(null);
+  };
+
+  const handleButtonClick = (button) => {
+    dispatch(selectCard(button));
+    setSelectedButton(button);
   };
 
   return (
-    <div className="flex justify-center items-center gap-2">
-      <div className="m-1 rounded-full bg-[--grey]">
-        <button
-          className="cursor-pointer flex p-2 rounded-full bg-white outline outline-[--black] outline-4 drop-shadow-md"
+    <motion.div 
+      className="flex justify-center items-center gap-4 p-4 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg shadow-xl"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div 
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <Button
+          className="p-2 rounded-full bg-white text-gray-800 shadow-md hover:shadow-lg transition-all duration-300"
           onClick={resetBoard}
         >
-          <AdjustmentsHorizontalIcon className="h-8 w-8 text-[--grey-dark]" />
-        </button>
-      </div>
-      <div className="flex space-x-1">
+          <AdjustmentsHorizontalIcon className="h-6 w-6" />
+        </Button>
+      </motion.div>
+      <div className="flex space-x-2">
         {buttons.map((button, index) => (
-          <Button
+          <motion.div
             key={button}
-            className={`font-extrabold cursor-pointer focus:drop-shadow-lg
-            w-16 h-12 rounded focus:ring focus:ring-offset-2 ${colors[index]}
-            transition-all duration-500 ease-in-out focus:ring-2`}
-            onClick={() => dispatch(selectCard(button))}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <span className="">{button}</span>
-          </Button>
+            <Button
+              className={`font-extrabold text-white w-12 h-12 rounded-lg shadow-md hover:shadow-lg 
+                ${colors[index]} 
+                transition-all duration-300
+                ${selectedButton === button ? 'ring-4 ring-white' : ''}
+              `}
+              onClick={() => handleButtonClick(button)}
+            >
+              {button}
+            </Button>
+          </motion.div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

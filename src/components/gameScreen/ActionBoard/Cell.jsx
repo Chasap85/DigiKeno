@@ -1,10 +1,23 @@
+import { motion } from "framer-motion";
+
 export default function Cell({ number, theme, onClick }) {
+  const baseClasses = "w-full aspect-square rounded-lg flex items-center justify-center text-xl font-bold cursor-pointer transition-all duration-300 transform hover:scale-105";
+  
+  const themeClasses = {
+    hit: "bg-yellow-400 text-red-600 ring-4 ring-red-600 animate-pulse",
+    dealt: "bg-red-600 text-white",
+    selected: "bg-blue-500 text-white",
+    default: "bg-gray-700 text-gray-300 hover:bg-gray-600"
+  };
+
   return (
-    <button
+    <motion.div
+      className={`${baseClasses} ${themeClasses[theme]}`}
       onClick={onClick}
-      className={`${theme} text-[--black] w-10 h-10 m-0 p-0 text-3xl focus:outline-none hover:bg-[--red] hover:text-white`}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
     >
       {number}
-    </button>
+    </motion.div>
   );
 }

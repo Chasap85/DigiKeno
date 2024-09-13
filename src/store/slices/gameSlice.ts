@@ -30,6 +30,7 @@ export const {
   throwBet,
   displayWinnings,
   setDealtNumbers,
+  updatePlayerCredits,
 } = selectionSlice.actions;
 
 export default selectionSlice.reducer;
