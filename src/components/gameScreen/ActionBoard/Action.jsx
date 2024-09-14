@@ -38,7 +38,7 @@ function Action() {
     dispatch(betMax());
   };
   const handlePlay = () => {
-    if (totalPicks.length > 3 && credits > wagerAmt) {
+    if (totalPicks.length > 3 && credits >= wagerAmt) {
       setShowAll(!showAll);
       dispatch(throwBet());
       dispatch(clearCards(playerCards));
